@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Shopping_Cart_Practice.Models.Table_Product>
+
+@{
+    ViewBag.Title = "index";
+}
+
+<h2>index</h2>
+
+<table  cellpadding="2" cellspacing="2" border="1" >
+
+     <tr>
+         <th>ID</th>
+         <th>Title</th>
+         <th>Price</th>
+         <th>Quantity</th>
+         <th>Buy</th>
+     </tr>
+
+    @foreach(var items in Model)
+    {
+        
+     <tr>
+         <th>@items.id</th>
+         <th>@items.p_title</th>
+         <th>@items.p_price</th>
+         <th>@Html.DropDownList("qty", String.Empty)
+        
+         <td align="center">@Html.ActionLink("Order Now", "OrderNow", "Shopping_Cart", new { id = items.id }, null) </td>
+     
+     </tr>
+    
+    }
+
+</table>

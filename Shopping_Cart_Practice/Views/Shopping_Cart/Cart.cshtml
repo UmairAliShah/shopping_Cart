@@ -1,0 +1,44 @@
+﻿@using  Shopping_Cart_Practice.Controllers
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+<table cellpadding="2" cellspacing="2" border="1">
+
+    <tr>
+        <th>Remove</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        
+        <th>Order Quantity</th>
+        <th>Sub Total</th>
+    </tr>
+ 
+    @{decimal s = 0;}
+    @foreach (Item items in  (List<Item>)Session["cart"])
+    {
+
+        s = s + Convert.ToDecimal(items.Product.p_price * items.Quantity);
+        <tr>
+            <th>@Html.ActionLink("Remve", "Delete", "Shopping_Cart", new { id = items.Product.id }, null)</th>
+            <th>@items.Product.id</th>
+            <th>@items.Product.p_title</th>
+            <th>@items.Product.p_price</th>
+            
+            <th>@items.Quantity</th>
+            <th>@(items.Product.p_price * items.Quantity) </th>
+           
+
+        </tr>
+
+    }
+    <tr>
+        <td align="right" colspan="5">Sum</td>
+        <td>@s</td>
+        </tr>
+     
+</table>
+@Html.ActionLink("Continue to Shopping", "Index", "Product")
